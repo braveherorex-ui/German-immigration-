@@ -1,90 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visa Status Verification | Auswärtiges Amt</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
-        .header { background-color: #000; color: #fff; padding: 20px; text-align: center; border-bottom: 5px solid #ffce00; }
-        .container { max-width: 600px; margin: 50px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h2 { color: #333; text-align: center; }
-        .input-group { margin: 20px 0; }
-        input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 16px; }
-        button { width: 100%; padding: 12px; background-color: #000; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; }
-        button:hover { background-color: #333; }
-        #results-section { display: none; margin-top: 30px; border-top: 2px solid #eee; padding-top: 20px; }
-        .status-badge { display: inline-block; padding: 8px 15px; background-color: #28a745; color: white; border-radius: 20px; font-weight: bold; margin-bottom: 15px; }
-        .detail-row { display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid #f9f9f9; padding-bottom: 5px; }
-        .label { font-weight: bold; color: #666; }
-        .value { color: #000; font-weight: 500; }
-        .footer { text-align: center; margin-top: 50px; font-size: 12px; color: #999; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visa Status Verification | Federal Republic of Germany</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    .de-border { border-left: 6px solid #ffce00; }
+    .status-badge-approved { background: #dcfce7; color: #166534; border: 1px solid #166534; padding: 4px 12px; border-radius: 2px; font-weight: bold; }
+</style>
 </head>
-<body>
+<body class="bg-[#f3f4f6] text-[#333] font-sans">
 
-<div class="header">
-    <div style="font-size: 12px; letter-spacing: 2px;">AUSWÄRTIGES AMT</div>
-    <div style="font-size: 18px; font-weight: bold;">Federal Foreign Office</div>
-</div>
-
-<div class="container">
-    <h2>Consular Services: Visa Tracking</h2>
-    <p style="font-size: 14px; color: #666; text-align: center;">Enter your Reference Number to verify the current status of your application.</p>
-    
-    <div class="input-group">
-        <input type="text" id="visaId" placeholder="Example: 5474408534863">
-    </div>
-    <button onclick="verifyVisa()">Check Status</button>
-
-    <div id="results-section">
-        <div style="text-align: center;">
-            <div class="status-badge">✓ APPLICATION APPROVED</div>
+    <header class="bg-[#002d5a] text-white shadow-lg">
+        <div class="max-w-5xl mx-auto p-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white p-1 rounded">
+                    <div class="w-8 h-1 bg-black"></div>
+                    <div class="w-8 h-1 bg-red-600"></div>
+                    <div class="w-8 h-1 bg-yellow-400"></div>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-[10px] uppercase tracking-widest font-bold">Auswärtiges Amt</p>
+                    <p class="text-sm font-serif italic">Federal Foreign Office</p>
+                </div>
+            </div>
+            <div class="text-[10px] uppercase font-bold tracking-widest border-l pl-4 border-white/20">
+                Consular Services Portal
+            </div>
         </div>
-        
-        <div class="detail-row"><span class="label">Applicant Name:</span> <span class="value" id="res-name"></span></div>
-        <div class="detail-row"><span class="label">Visa Category:</span> <span class="value" id="res-type"></span></div>
-        <div class="detail-row"><span class="label">Duration of Stay:</span> <span class="value" id="res-duration"></span></div>
-        <div class="detail-row"><span class="label">Decision Date:</span> <span class="value">April 16, 2026</span></div>
-        <div class="detail-row"><span class="label">Passport Status:</span> <span class="value">Ready for Collection</span></div>
-        
-        <p style="font-size: 12px; color: #28a745; margin-top: 20px; text-align: center;">
-            Official digital verification complete. Please present this reference code at the VFS Global center or Consular section.
-        </p>
-    </div>
-</div>
+    </header>
 
-<div class="footer">
-    &copy; 2026 Auswärtiges Amt - Federal Foreign Office of Germany
-</div>
+    <main class="max-w-4xl mx-auto mt-10 p-6">
+        <div class="bg-white shadow-sm border border-slate-200 p-8 rounded-sm">
+            <h1 class="text-2xl font-serif text-[#002d5a] font-bold border-b pb-4 mb-8">Visa Application & Consignment Status</h1>
+            
+            <p class="text-sm mb-6 text-slate-500">Please provide your Reference Number or International Tracking ID to verify the status of your entry permit and associated travel documents to the Federal Republic of Germany.</p>
+
+            <div class="bg-slate-50 p-6 border rounded-sm flex flex-col md:flex-row gap-4">
+                <div class="flex-grow">
+                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Reference Number</label>
+                    <input id="refInput" type="text" placeholder="Enter Reference Number" class="w-full p-3 border border-slate-300 rounded-sm focus:border-[#002d5a] outline-none font-mono">
+                </div>
+                <button onclick="checkVisa()" class="bg-[#002d5a] text-white px-10 py-3 rounded-sm font-bold hover:bg-[#001f3f] transition self-end">VERIFY STATUS</button>
+            </div>
+
+            <div id="visaResult" class="mt-12 hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-lg font-bold uppercase tracking-wide text-slate-700">Verification Result</h2>
+                    <span class="status-badge-approved">APPROVED / GRANTED</span>
+                </div>
+
+                <div class="border-t-4 border-[#002d5a] shadow-md overflow-hidden bg-white">
+                    <table class="min-w-full text-sm">
+                        <tbody class="divide-y divide-slate-200">
+                            <tr>
+                                <td class="px-6 py-4 bg-slate-50 font-bold text-slate-500 uppercase text-[10px] w-1/3">Applicant Full Name</td>
+                                <td id="applicant" class="px-6 py-4 font-bold text-slate-800"></td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 bg-slate-50 font-bold text-slate-500 uppercase text-[10px]">Visa Category</td>
+                                <td id="category" class="px-6 py-4 text-slate-800"></td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 bg-slate-50 font-bold text-slate-500 uppercase text-[10px]">Sponsoring Party</td>
+                                <td id="sponsor" class="px-6 py-4 text-slate-800"></td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 bg-slate-50 font-bold text-slate-500 uppercase text-[10px]">Validity Period</td>
+                                <td id="validity" class="px-6 py-4 text-blue-800 font-bold"></td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 bg-slate-50 font-bold text-slate-500 uppercase text-[10px]">Current Status</td>
+                                <td class="px-6 py-4">
+                                    <div class="de-border pl-3">
+                                        <p class="font-bold text-green-700">Visa Issued & Documents Packaged</p>
+                                        <p class="text-xs text-slate-500 mt-1">Ready for courier dispatch to Germany Hub.</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-8 p-4 bg-blue-50 border border-blue-200 text-xs text-blue-800 leading-relaxed">
+                    <strong>Note:</strong> This document serves as a digital confirmation of the entry permit grant. Final physical stamps and associated security consignments will be delivered to the registered address in Neustadt in Holstein.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-10 text-slate-400 text-[10px] uppercase tracking-widest">
+        &copy; 2026 Federal Republic of Germany | Consular Data Systems
+    </footer>
 
 <script>
-    function verifyVisa() {
-        const id = document.getElementById('visaId').value.trim();
-        const results = document.getElementById('results-section');
-        
-        const nameField = document.getElementById('res-name');
-        const typeField = document.getElementById('res-type');
-        const durationField = document.getElementById('res-duration');
-
-        if (id === "5474408534863") {
-            nameField.innerText = "Abigel Oko Ebeyin";
-            typeField.innerText = "Spousal Visa (Family Reunion)";
-            durationField.innerText = "5 Years (60 Months)";
-            results.style.display = "block";
-        } 
-        else if (id === "5474408534889") {
-            nameField.innerText = "Gabriel Osaruyimen Osazeemen";
-            typeField.innerText = "National Visa (Educational/Research)";
-            durationField.innerText = "5 Years (60 Months)";
-            results.style.display = "block";
-        } 
-        else {
-            alert("Record not found. Please verify the Reference Number.");
-            results.style.display = "none";
-        }
+const visaDB = {
+    "5474408534863": {
+        name: "Abigel Oko Ebeyin",
+        visa: "Spousal Visa (Family Reunion)",
+        sponsor: "Gabriel Osaruyimen Osazeemen",
+        duration: "5 Years (Multiple Entry)"
+    },
+    "5474408534889": {
+        name: "Gabriel Osaruyimen Osazeemen",
+        visa: "National Visa (Educational/Research)",
+        sponsor: "Federal Government of Germany",
+        duration: "5 Years (60 Months)"
     }
-</script>
+};
 
+function checkVisa() {
+    const input = document.getElementById('refInput').value.trim();
+    const res = document.getElementById('visaResult');
+    
+    if (visaDB[input]) {
+        res.classList.remove('hidden');
+        document.getElementById('applicant').innerText = visaDB[input].name;
+        document.getElementById('category').innerText = visaDB[input].visa;
+        document.getElementById('sponsor').innerText = visaDB[input].sponsor;
+        document.getElementById('validity').innerText = visaDB[input].duration;
+    } else {
+        alert("Reference number not found. Please verify the ID provided by the Consular section.");
+    }
+}
+</script>
 </body>
 </html>
